@@ -1,0 +1,20 @@
+</fieldset>
+<fieldset class="box tabular">
+  <legend><%=l :label_pushover_preferences %></legend>
+  <% if RedminePushover::configured? %>
+    <p>
+      <% if RedminePushover::connected? %>
+        <label><%= l :label_pushover_active %></label>
+        <%= link_to l(:label_pushover_manage), pushover_activation_url %>
+        <em class="info"><%= l :info_pushover_manage %></em>
+      <% else %>
+        <label><%= l :label_pushover_inactive %></label>
+        <%= link_to l(:label_pushover_activate), pushover_activation_url %>
+        <em class="info"><%= l :info_pushover_activation %></em>
+      <% end %>
+    </p>
+
+
+  <% else %>
+    <p><%= l :info_configure_pushover %></p>
+  <% end %>

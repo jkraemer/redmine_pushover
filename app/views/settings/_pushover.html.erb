@@ -1,0 +1,10 @@
+<p>
+  <label for="settings_pushover_token"><%= l :label_pushover_pushover_token %></label>
+  <%= text_field_tag 'settings[pushover_token]', @settings['pushover_token'], size: 50 %>
+  <em class="info"><%= raw l :info_pushover_pushover_token, new_app_url: 'https://pushover.net/apps/build' %></em>
+</p>
+<p>
+  <label for="settings_pushover_url"><%= l :label_pushover_pushover_url %></label>
+  <%= text_field_tag 'settings[pushover_url]', @settings['pushover_url'], size: 50 %>
+  <em class="info"><%= raw l :info_pushover_pushover_url, url: home_url %></em>
+</p>
