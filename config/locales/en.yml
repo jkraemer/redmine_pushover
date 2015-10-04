@@ -4,16 +4,17 @@ en:
   flash_pushover_unsubscribed: You unsubscribed from Pushover notifications.
   flash_pushover_updated: Your Pushover settings were updated.
 
-  label_pushover_activate: Click here to activate
+  label_pushover_activate: Connect with Pushover
   label_pushover_active: Active
   label_pushover_inactive: Inactive
   label_pushover_manage: Change your Pushover subscription
   label_pushover_preferences: Pushover Notifications
   label_pushover_pushover_token: Pushover API token
   label_pushover_pushover_url: Pushover subscription URL
+  label_pushover_skip_emails: Pushover notifications only, do not send emails
 
   info_configure_pushover: Pushover is not configured yet. Please ask an administrator to do so under Administration / Plugins.
   info_pushover_pushover_token: '<a href="%{new_app_url}">Create a Pushover application</a> to get your API token. Select "Website" as application type, and upload an icon if you want.'
   info_pushover_pushover_url: 'Then, create a subscription by clicking on "Edit Subscription Settings" and choose the "URL" subscription type, setting the base URL to <code>%{url}</code>. After creating the subscription, a subscription URL like <code>https://pushover.net/subscribe/Redmine-f504h08fhlasdfj</code> will be shown. This is what you have to enter here.'
-  info_pushover_activation: 'Connect this Redmine installation to your Pushover account.'
-  info_pushover_manage: 'Pushover notifications are currently active. Click the link to change your settings or stop reveiving notifications from this Redmine.'
+  info_pushover_activation: 'Pushover notifications are currently <strong>disabled</strong>. Use the link below to connect your Redmine account to Pushover.'
+  info_pushover_manage: 'Pushover notifications are currently <strong>enabled</strong>. Use the link below to change your Pushover settings or to stop reveiving notifications from this Redmine.'

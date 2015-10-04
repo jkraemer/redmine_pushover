@@ -1,1 +1,1 @@
-gem 'pry-rails'
+gem 'httparty'

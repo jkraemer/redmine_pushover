@@ -1,9 +1,20 @@
 require 'uri'
 
+require_dependency 'redmine_pushover/patches/mailer_patch'
+require_dependency 'redmine_pushover/patches/user_patch'
+require_dependency 'redmine_pushover/patches/user_preference_patch'
+
 module RedminePushover
   class << self
 
     def setup
+      Mailer.class_eval do
+        class << self
+          prepend Patches::MailerPatch::ClassMethods
+        end
+      end
+      User.send :prepend, Patches::UserPatch
+      UserPreference.send :prepend, Patches::UserPreferencePatch
     end
 
     def api_key
@@ -12,10 +23,6 @@ module RedminePushover
 
     def configured?
       Setting.plugin_redmine_pushover['pushover_url'].present?
-    end
-
-    def connected?
-      User.current.pref['pushover_user_key'].present?
     end
 
     def subscription_url(success, failure)

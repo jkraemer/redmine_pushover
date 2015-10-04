@@ -1,19 +1,22 @@
 </fieldset>
-<fieldset class="box tabular">
+<fieldset class="box">
   <legend><%=l :label_pushover_preferences %></legend>
   <% if RedminePushover::configured? %>
-    <p>
-      <% if RedminePushover::connected? %>
-        <label><%= l :label_pushover_active %></label>
-        <%= link_to l(:label_pushover_manage), pushover_activation_url %>
-        <em class="info"><%= l :info_pushover_manage %></em>
-      <% else %>
-        <label><%= l :label_pushover_inactive %></label>
-        <%= link_to l(:label_pushover_activate), pushover_activation_url %>
-        <em class="info"><%= l :info_pushover_activation %></em>
-      <% end %>
-    </p>
+    <% if User.current.pushover_connected? %>
+      <p><%= raw l :info_pushover_manage %></p>
+      <p><%= link_to l(:label_pushover_manage), pushover_activation_url %></p>
 
+
+      <%= fields_for :pref, @user.pref do |pref_fields| %>
+        <p>
+          <%= pref_fields.check_box :pushover_skip_emails %>
+          <label for="pref_pushover_skip_emails"><%= l :label_pushover_skip_emails %></label>
+        </p>
+      <% end %>
+    <% else %>
+      <p><%= raw l :info_pushover_activation %></p>
+      <p><%= link_to l(:label_pushover_activate), pushover_activation_url %></p>
+    <% end %>
 
   <% else %>
     <p><%= l :info_configure_pushover %></p>
