@@ -1,4 +1,4 @@
-require_relative '../test_helper'
+require File.join __dir__, '../test_helper'
 
 class PushoverCallbacksControllerTest < ActionController::TestCase
   fixtures :users

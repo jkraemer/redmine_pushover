@@ -1,4 +1,4 @@
-require_relative '../test_helper'
+require File.join __dir__, '../test_helper'
 
 class PushoverMailerPatchTest < ActiveSupport::TestCase
   fixtures :projects, :enabled_modules, :issues, :users, :email_addresses,
