@@ -8,7 +8,7 @@ module RedminePushover
     end
 
     def get_message(mail)
-      mail.text_part.body.to_s.tap do |text|
+      (mail.text_part || mail).body.to_s.tap do |text|
         text.sub! /^-- ?\n.*\z/m, '' if RedminePushover::strip_signature?
         text.strip!
       end
