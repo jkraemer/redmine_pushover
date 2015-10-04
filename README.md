@@ -2,6 +2,7 @@ Redmine Pushover Plugin [![Build Status](https://travis-ci.org/jkraemer/redmine_
 =======================
 
 
+
 This plugin sends push notifications (via Pushover) instead of or in addition to
 the standard notification emails.
 
