@@ -5,17 +5,17 @@ class PushoverMailerPatchTest < ActiveSupport::TestCase
     :members, :member_roles, :roles, :trackers, :projects_trackers,
            :issue_statuses, :enumerations, :journals
 
-  ::RedminePushover::Notification.class_eval do
+  ::RedminePushover::Pushover.class_eval do
     cattr_accessor :deliveries
-    def deliver_to(user)
-      self.class.deliveries << [self, user]
+    def self.send_message(msg)
+      deliveries << msg
     end
   end
 
   setup do
     Setting.plugin_redmine_pushover['pushover_url'] = 'https://pushover.net/subscribe/Redmine-someT0ken'
     (@emails = ActionMailer::Base.deliveries).clear
-    @push_notifs = RedminePushover::Notification.deliveries = []
+    @push_notifs = RedminePushover::Pushover.deliveries = []
     @user = User.find(3)
     @user.pref['pushover_user_key'] = 'secret'
     @user.pref.save
@@ -33,9 +33,9 @@ class PushoverMailerPatchTest < ActiveSupport::TestCase
     assert_equal 2, m.bcc.size
     assert m.bcc.include? User.find(2).mail
     assert m.bcc.include? @user.mail
-    notif, user = @push_notifs.last
-    assert_equal @user, user
-    assert_equal m.subject, notif.instance_variable_get(:@subject)
+    assert msg = @push_notifs.last
+    assert_equal @user.pushover_key, msg[:user]
+    assert_equal m.subject, msg[:title]
   end
 
   test 'should send push notif and skip email' do
@@ -51,9 +51,9 @@ class PushoverMailerPatchTest < ActiveSupport::TestCase
     assert m = @emails.last
     assert_equal 1, m.bcc.size
     assert_equal User.find(2).mail, m.bcc.last
-    notif, user = @push_notifs.last
-    assert_equal @user, user
-    assert_equal m.subject, notif.instance_variable_get(:@subject)
+    assert msg = @push_notifs.last
+    assert_equal @user.pushover_key, msg[:user]
+    assert_equal m.subject, msg[:title]
   end
 
 end

@@ -25,6 +25,10 @@ module RedminePushover
       Setting.plugin_redmine_pushover['pushover_url'].present?
     end
 
+    def strip_signature?
+      Setting.plugin_redmine_pushover['strip_signature'].to_s == '1'
+    end
+
     def subscription_url(success, failure)
       if configured?
         uri = URI(Setting.plugin_redmine_pushover['pushover_url'])

@@ -14,7 +14,7 @@ Redmine::Plugin.register :redmine_pushover do
 
   requires_redmine version_or_higher: '3.1.0'
 
-  settings partial: 'settings/pushover', default: {}
+  settings partial: 'settings/pushover', default: { strip_signature: '1' }
 end
 
 Rails.configuration.to_prepare do

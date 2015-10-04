@@ -8,3 +8,7 @@
   <%= text_field_tag 'settings[pushover_url]', @settings['pushover_url'], size: 50 %>
   <em class="info"><%= raw l :info_pushover_pushover_url, url: home_url %></em>
 </p>
+<p>
+  <label for="settings_strip_signature"><%= l :label_pushover_strip_signature%></label>
+  <%= check_box_tag 'settings[strip_signature]', '1', RedminePushover::strip_signature? %>
+</p>

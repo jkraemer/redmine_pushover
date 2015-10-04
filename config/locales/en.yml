@@ -12,7 +12,7 @@ en:
   label_pushover_pushover_token: Pushover API token
   label_pushover_pushover_url: Pushover subscription URL
   label_pushover_skip_emails: Pushover notifications only, do not send emails
-
+  label_pushover_strip_signature: Strip email signature from pushover notifications
   info_configure_pushover: Pushover is not configured yet. Please ask an administrator to do so under Administration / Plugins.
   info_pushover_pushover_token: '<a href="%{new_app_url}">Create a Pushover application</a> to get your API token. Select "Website" as application type, and upload an icon if you want.'
   info_pushover_pushover_url: 'Then, create a subscription by clicking on "Edit Subscription Settings" and choose the "URL" subscription type, setting the base URL to <code>%{url}</code>. After creating the subscription, a subscription URL like <code>https://pushover.net/subscribe/Redmine-f504h08fhlasdfj</code> will be shown. This is what you have to enter here.'
