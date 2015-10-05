@@ -6,6 +6,15 @@ class PushoverNotificationTest < ActiveSupport::TestCase
     @fixture_path = File.expand_path '../../../../../test/fixtures/mail_handler', __FILE__
   end
 
+  test 'should strip header from mail' do
+    Setting.emails_header  = '-- In your reply, please do not write anything below this line --'
+    m = Mail.new
+    m.body = "-- In your reply, please do not write anything below this line --\n\nLorem ipsum"
+    n = RedminePushover::Notification.new(m)
+    assert msg = n.instance_variable_get('@message')
+    assert_equal 'Lorem ipsum', msg
+  end
+
   test 'should get text from plain text mail' do
     m = Mail.new IO.read File.join @fixture_path, 'ticket_with_long_subject.eml'
     assert n = RedminePushover::Notification.new(m)
