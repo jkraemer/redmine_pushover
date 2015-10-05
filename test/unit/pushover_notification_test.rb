@@ -3,7 +3,7 @@ require File.expand_path('../../test_helper', __FILE__)
 class PushoverNotificationTest < ActiveSupport::TestCase
 
   setup do
-    @fixture_path = File.join __dir__, '../../../../test/fixtures/mail_handler'
+    @fixture_path = File.expand_path '../../../../../test/fixtures/mail_handler', __FILE__
   end
 
   test 'should get text from plain text mail' do
