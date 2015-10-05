@@ -4,6 +4,12 @@ rvm:
   - 2.2
   - jruby-9.0.1.0
 
+matrix:
+  allow_failures:
+    # currently gives StackOverflows in the mailer patch. JRuby bug?
+    # possibly https://github.com/jruby/jruby/issues/3193
+    - rvm: jruby-9.0.1.0
+
 branches:
   only:
     - master
