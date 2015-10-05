@@ -1,4 +1,4 @@
-require File.join __dir__, '../test_helper'
+require File.expand_path('../../test_helper', __FILE__)
 
 class PushoverMailerPatchTest < ActiveSupport::TestCase
   fixtures :projects, :enabled_modules, :issues, :users, :email_addresses,
