@@ -13,7 +13,7 @@ module RedminePushover
           prepend Patches::MailerPatch::ClassMethods
         end
       end
-      User.send :prepend, Patches::UserPatch
+      Patches::UserPatch.apply
       UserPreference.send :prepend, Patches::UserPreferencePatch
     end
 
