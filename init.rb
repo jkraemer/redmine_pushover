@@ -10,9 +10,9 @@ Redmine::Plugin.register :redmine_pushover do
   author     'Jens Krämer'
   author_url 'https://jkraemer.net/'
 
-  version '1.0.0'
+  version '1.0.1'
 
-  requires_redmine version_or_higher: '3.1.0'
+  requires_redmine version_or_higher: '2.6.0'
 
   settings partial: 'settings/pushover', default: { strip_signature: '1' }
 end
