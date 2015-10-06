@@ -1,9 +1,15 @@
 require File.expand_path('../../test_helper', __FILE__)
 
 class PushoverMailerPatchTest < ActiveSupport::TestCase
-  fixtures :projects, :enabled_modules, :issues, :users, :email_addresses,
-    :members, :member_roles, :roles, :trackers, :projects_trackers,
-           :issue_statuses, :enumerations, :journals
+  if Redmine::VERSION::MAJOR < 3
+    fixtures :projects, :enabled_modules, :issues, :users,
+      :members, :member_roles, :roles, :trackers, :projects_trackers,
+      :issue_statuses, :enumerations, :journals
+  else
+    fixtures :projects, :enabled_modules, :issues, :users, :email_addresses,
+      :members, :member_roles, :roles, :trackers, :projects_trackers,
+      :issue_statuses, :enumerations, :journals
+  end
 
   ::RedminePushover::Pushover.class_eval do
     cattr_accessor :deliveries
