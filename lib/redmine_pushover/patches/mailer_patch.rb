@@ -2,6 +2,14 @@ module RedminePushover
   module Patches
     module MailerPatch
 
+      def self.apply
+        Mailer.class_eval do
+          class << self
+            prepend ClassMethods
+          end
+        end
+      end
+
       module ClassMethods
 
         def deliver_mail(mail, &block)

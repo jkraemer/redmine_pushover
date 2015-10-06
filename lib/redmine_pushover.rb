@@ -8,11 +8,7 @@ module RedminePushover
   class << self
 
     def setup
-      Mailer.class_eval do
-        class << self
-          prepend Patches::MailerPatch::ClassMethods
-        end
-      end
+      Patches::MailerPatch.apply
       Patches::UserPatch.apply
       UserPreference.send :prepend, Patches::UserPreferencePatch
     end
