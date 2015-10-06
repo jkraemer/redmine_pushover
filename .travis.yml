@@ -18,6 +18,7 @@ addons:
   postgresql: "9.4"
 
 env:
+  - REDMINE_VER=2.6-stable
   - REDMINE_VER=3.1-stable
   - REDMINE_VER=master
 
