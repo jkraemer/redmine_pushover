@@ -9,7 +9,7 @@ module RedminePushover
 
     def get_message(mail)
       (mail.text_part || mail).body.to_s.tap do |text|
-        text.sub! Setting.emails_header, '' if Setting.emails_header.present?
+        text.sub! Setting.emails_header.strip, '' if Setting.emails_header.present?
         text.sub! /^-- ?\n.*\z/m, '' if RedminePushover::strip_signature?
         text.strip!
       end

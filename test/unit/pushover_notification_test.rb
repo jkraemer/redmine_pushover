@@ -7,7 +7,7 @@ class PushoverNotificationTest < ActiveSupport::TestCase
   end
 
   test 'should strip header from mail' do
-    Setting.emails_header  = '-- In your reply, please do not write anything below this line --'
+    Setting.emails_header  = "-- In your reply, please do not write anything below this line --\n"
     m = Mail.new
     m.body = "-- In your reply, please do not write anything below this line --\n\nLorem ipsum"
     n = RedminePushover::Notification.new(m)
