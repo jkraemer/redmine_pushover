@@ -8,6 +8,9 @@ module RedminePushover
       r = post '/messages.json',
             query: message.merge(token: RedminePushover::api_key)
       if r['status'] == 1
+        if Rails.logger.debug?
+          Rails.logger.debug "pushover message sent:\n#{message}\n\n#{r}"
+        end
         true
       else
         Rails.logger.warn "pushover request failed:\n#{message}\n\n#{r}"
