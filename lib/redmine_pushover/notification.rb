@@ -12,7 +12,7 @@ module RedminePushover
         text.sub! Setting.emails_header.strip, '' if Setting.emails_header.present?
         text.sub! /^-- ?\n.*\z/m, '' if RedminePushover::strip_signature?
         text.strip!
-      end
+      end[0..1023]
     end
 
     def add_recipient(user)
