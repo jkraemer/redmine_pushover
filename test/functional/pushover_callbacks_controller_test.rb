@@ -4,20 +4,25 @@ class PushoverCallbacksControllerTest < ActionController::TestCase
   fixtures :users
 
   setup do
-    session[:user_id] = 3
   end
 
-  test 'should require user' do
-    session[:user_id] = nil
+  test 'should require user for activate' do
     get :activate
     assert_redirected_to signin_path(back_url: pushover_activation_url)
+  end
+
+  test 'should require user for success' do
     get :success
     assert_redirected_to signin_path(back_url: pushover_success_url)
+  end
+
+  test 'should require user for failure' do
     get :failure
     assert_redirected_to signin_path(back_url: pushover_failure_url)
   end
 
   test 'should not store user key with wrong state' do
+    session[:user_id] = 3
     @request.session[:pushover_activation_secret] = 'secret'
     get :success, state: 'wrong', pushover_user_key: 'userkey'
     assert_redirected_to my_account_path
@@ -25,6 +30,7 @@ class PushoverCallbacksControllerTest < ActionController::TestCase
   end
 
   test 'should store user key on success' do
+    session[:user_id] = 3
     @request.session[:pushover_activation_secret] = 'secret'
     get :success, state: 'secret', pushover_user_key: 'userkey'
     assert_redirected_to my_account_path

@@ -26,6 +26,7 @@ class PushoverMailerPatchTest < ActiveSupport::TestCase
     @user.pref['pushover_user_key'] = 'secret'
     @user.pref.save
     @journal = Journal.find(3)
+    User.find(2).pref.update_attribute :no_self_notified, false
   end
 
   test 'should send push notif and email' do
