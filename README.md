@@ -24,7 +24,7 @@ After that, users may activate push notifications in their account settings.
 License
 -------
 
-Copyright (C) 2015 [Jens Krämer](https://jkraemer.net)
+Copyright (C) 2015-2017 [Jens Krämer](https://jkraemer.net)
 
 The Pushover plugin for Redmine is free software: you can redistribute
 it and/or modify it under the terms of the GNU General Public License as
