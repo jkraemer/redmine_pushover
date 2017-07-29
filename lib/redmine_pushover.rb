@@ -25,6 +25,16 @@ module RedminePushover
       Setting.plugin_redmine_pushover['strip_signature'].to_s == '1'
     end
 
+    def proxy_options
+      {}.tap do |opts|
+        if addr = Setting.plugin_redmine_pushover['http_proxy_addr'].presence
+          opts[:http_proxy_addr] = addr
+          opts[:http_proxy_port] =
+            Setting.plugin_redmine_pushover['http_proxy_port'].presence
+        end
+      end
+    end
+
     def subscription_url(success, failure)
       if configured?
         uri = URI(Setting.plugin_redmine_pushover['pushover_url'])

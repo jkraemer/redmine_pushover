@@ -9,6 +9,15 @@
   <em class="info"><%= raw l :info_pushover_pushover_url, url: home_url %></em>
 </p>
 <p>
+  <label for="settings_http_proxy_addr"><%= l :label_pushover_http_proxy_addr %></label>
+  <%= text_field_tag 'settings[http_proxy_addr]', @settings['http_proxy_addr'], size: 50 %>
+  <em class="info"><%= raw l :info_pushover_http_proxy_addr %></em>
+</p>
+<p>
+  <label for="settings_http_proxy_port"><%= l :label_pushover_http_proxy_port %></label>
+  <%= text_field_tag 'settings[http_proxy_port]', @settings['http_proxy_port'], size: 7 %>
+</p>
+<p>
   <label for="settings_strip_signature"><%= l :label_pushover_strip_signature%></label>
   <%= check_box_tag 'settings[strip_signature]', '1', RedminePushover.strip_signature? %>
 </p>
