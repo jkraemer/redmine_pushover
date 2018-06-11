@@ -10,7 +10,7 @@ module RedminePushover
     def setup
       Patches::MailerPatch.apply
       Patches::UserPatch.apply
-      UserPreference.send :prepend, Patches::UserPreferencePatch
+      Patches::UserPreferencePatch.apply
     end
 
     def api_key
