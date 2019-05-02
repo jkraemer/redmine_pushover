@@ -16,7 +16,6 @@ module RedminePushover
       end
 
       def pushover_skip_emails=(value)
-        byebug
         self[:pushover_skip_emails] = value
       end
 
