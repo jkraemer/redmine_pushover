@@ -1,8 +1,8 @@
 require 'securerandom'
 
 class PushoverCallbacksController < ApplicationController
-  skip_before_filter :check_if_login_required
-  before_filter :require_login
+  skip_before_action :check_if_login_required
+  before_action :require_login
 
   def activate
     state = session[:pushover_activation_secret] ||= SecureRandom.urlsafe_base64
