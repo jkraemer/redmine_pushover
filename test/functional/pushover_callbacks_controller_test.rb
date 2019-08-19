@@ -24,7 +24,7 @@ class PushoverCallbacksControllerTest < ActionController::TestCase
   test 'should not store user key with wrong state' do
     session[:user_id] = 3
     @request.session[:pushover_activation_secret] = 'secret'
-    get :success, state: 'wrong', pushover_user_key: 'userkey'
+    get :success, params: { state: 'wrong', pushover_user_key: 'userkey' }
     assert_redirected_to my_account_path
     assert_nil User.find(3).pref['pushover_user_key']
   end
@@ -32,7 +32,7 @@ class PushoverCallbacksControllerTest < ActionController::TestCase
   test 'should store user key on success' do
     session[:user_id] = 3
     @request.session[:pushover_activation_secret] = 'secret'
-    get :success, state: 'secret', pushover_user_key: 'userkey'
+    get :success, params: { state: 'secret', pushover_user_key: 'userkey' }
     assert_redirected_to my_account_path
     assert_equal 'userkey', User.find(3).pref['pushover_user_key']
   end

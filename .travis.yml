@@ -1,20 +1,8 @@
 language: ruby
 rvm:
-  - 2.2.6
-  - 2.3.3
-  - 2.4.0
-  - jruby-9.1.7.0
-
-matrix:
-  allow_failures:
-    # currently gives StackOverflows in the mailer patch. JRuby bug?
-    # possibly https://github.com/jruby/jruby/issues/3193
-    - rvm: jruby-9.1.7.0
-  exclude:
-    - rvm: 2.4.0
-      env: REDMINE_VER=2.6-stable
-    - rvm: 2.4.0
-      env: REDMINE_VER=3.3-stable
+  - 2.4.6
+  - 2.5.5
+  - 2.6.3
 
 branches:
   only:
@@ -24,8 +12,7 @@ addons:
   postgresql: "9.4"
 
 env:
-  - REDMINE_VER=2.6-stable
-  - REDMINE_VER=3.3-stable
+  - REDMINE_VER=4.0-stable
   - REDMINE_VER=master
 
 install: "echo skip bundle install"
