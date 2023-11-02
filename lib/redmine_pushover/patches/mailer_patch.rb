@@ -1,17 +1,9 @@
 module RedminePushover
   module Patches
     module MailerPatch
-
-      def self.apply
-        Mailer.class_eval do
-          class << self
-            prepend ClassMethods
-          end
-        end
-      end
+      extend ActiveSupport::Concern
 
       module ClassMethods
-
         def deliver_mail(mail, &block)
           if perform_deliveries
             notification = nil
@@ -33,9 +25,7 @@ module RedminePushover
 
           super
         end
-
       end
-
     end
   end
 end

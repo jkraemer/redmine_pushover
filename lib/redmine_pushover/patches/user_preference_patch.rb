@@ -1,14 +1,10 @@
 module RedminePushover
   module Patches
     module UserPreferencePatch
+      extend ActiveSupport::Concern
 
-      def self.apply
-        unless UserPreference < self
-          UserPreference.prepend self
-          UserPreference.class_eval do
-            safe_attributes 'pushover_skip_emails'
-          end
-        end
+      prepended do
+        safe_attributes 'pushover_skip_emails'
       end
 
       def pushover_skip_emails
@@ -18,8 +14,6 @@ module RedminePushover
       def pushover_skip_emails=(value)
         self[:pushover_skip_emails] = value
       end
-
     end
   end
 end
-

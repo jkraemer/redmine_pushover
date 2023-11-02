@@ -1,6 +1,3 @@
-require_dependency 'redmine_pushover'
-require_dependency 'redmine_pushover/view_hooks'
-
 Redmine::Plugin.register :redmine_pushover do
   name 'Redmine Pushover Notifications Plugin'
   url  'http://redmine-search.com/pushover'
@@ -10,14 +7,12 @@ Redmine::Plugin.register :redmine_pushover do
   author     'Jens Krämer'
   author_url 'https://jkraemer.net/'
 
-  version '1.0.2'
+  version '2.0.0'
 
-  requires_redmine version_or_higher: '2.6.0'
+  requires_redmine version_or_higher: '5.0.0'
 
   settings partial: 'settings/pushover', default: { strip_signature: '1' }
 end
 
-Rails.configuration.to_prepare do
-  RedminePushover.setup
-end
+RedminePushover.setup
 

@@ -1,16 +1,13 @@
 require 'uri'
 
-require_dependency 'redmine_pushover/patches/mailer_patch'
-require_dependency 'redmine_pushover/patches/user_patch'
-require_dependency 'redmine_pushover/patches/user_preference_patch'
-
 module RedminePushover
   class << self
 
     def setup
-      Patches::MailerPatch.apply
-      Patches::UserPatch.apply
-      Patches::UserPreferencePatch.apply
+      ::Mailer.prepend Patches::MailerPatch
+      ::User.prepend Patches::UserPatch
+      ::UserPreference.prepend Patches::UserPreferencePatch
+      RedminePushover::ViewHooks # just load it
     end
 
     def api_key
@@ -38,10 +35,9 @@ module RedminePushover
     def subscription_url(success, failure)
       if configured?
         uri = URI(Setting.plugin_redmine_pushover['pushover_url'])
-        query = uri.query.to_s.split('&')
-        query << "success=#{URI.escape success}"
-        query << "failure=#{URI.escape failure}"
-        uri.query = query.join('&')
+        params = { success: success, failure: failure }
+        query = URI.decode_www_form(uri.query || '') + params.to_a
+        uri.query = URI.encode_www_form(query)
         uri.to_s
       else
         nil
@@ -51,5 +47,4 @@ module RedminePushover
     end
 
   end
-
 end

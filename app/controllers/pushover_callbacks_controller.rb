@@ -8,7 +8,7 @@ class PushoverCallbacksController < ApplicationController
     state = session[:pushover_activation_secret] ||= SecureRandom.urlsafe_base64
     success = pushover_success_url state: state
     failure = pushover_failure_url
-    redirect_to RedminePushover::subscription_url success, failure
+    redirect_to RedminePushover.subscription_url success, failure
   end
 
   def success

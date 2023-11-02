@@ -6,16 +6,14 @@ module RedminePushover
 
     def self.send_message(message)
       options = RedminePushover.proxy_options
-      options[:query] = message.merge(token: RedminePushover::api_key)
+      options[:query] = message.merge(token: RedminePushover.api_key)
 
       r = post '/messages.json', options
       if r['status'] == 1
-        if Rails.logger.debug?
-          Rails.logger.debug "pushover message sent:\n#{message}\n\n#{r}"
-        end
+        Rails.logger.debug { "pushover message sent:\n#{message}\n\n#{r}" }
         true
       else
-        Rails.logger.warn "pushover request failed:\n#{message}\n\n#{r}"
+        Rails.logger.warn { "pushover request failed:\n#{message}\n\n#{r}" }
         false
       end
     end
