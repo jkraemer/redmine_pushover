@@ -1,4 +1,4 @@
-Redmine Pushover Plugin [![Build Status](https://travis-ci.org/jkraemer/redmine_pushover.svg?branch=master)](https://travis-ci.org/jkraemer/redmine_pushover)
+Redmine Pushover Plugin ![Build Status](https://github.com/jkraemer/redmine_pushover/workflows/Test%20with%20Redmine/badge.svg?branch=master)
 =======================
 
 

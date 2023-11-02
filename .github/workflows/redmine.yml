@@ -1,0 +1,29 @@
+name: Test with Redmine
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        redmine: [v5.1]
+        ruby: [v3.2]
+        database: [mysql]
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Redmine plugin test
+      uses: two-pack/redmine-plugin-test-action@v2
+      with:
+        plugin_name: redmine_pushover
+        redmine_version: ${{ matrix.redmine }}
+        ruby_version: ${{ matrix.ruby }}
+        database: ${{ matrix.database }}
