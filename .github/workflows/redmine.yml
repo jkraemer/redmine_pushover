@@ -14,8 +14,8 @@ jobs:
     strategy:
       matrix:
         redmine:
-          - v5.0
-          - v5.1
+          - 5.0
+          - 5.1
         ruby:
           - v3.0
           - v3.1
