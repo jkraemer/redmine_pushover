@@ -1,4 +1,4 @@
-Redmine Pushover Plugin ![Build Status](https://github.com/jkraemer/redmine_pushover/workflows/Test%20with%20Redmine/badge.svg?branch=master)
+Redmine Pushover Plugin [![Test with Redmine](https://github.com/jkraemer/redmine_pushover/actions/workflows/redmine.yml/badge.svg)](https://github.com/jkraemer/redmine_pushover/actions/workflows/redmine.yml)
 =======================
 
 
