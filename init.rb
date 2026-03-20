@@ -1,6 +1,6 @@
 Redmine::Plugin.register :redmine_pushover do
   name 'Redmine Pushover Notifications Plugin'
-  url  'http://redmine-search.com/pushover'
+  url  'https://jkraemer.net/redmine-plugins'
 
   description 'Get push notifications from Redmine via Pushover.'
 
@@ -15,4 +15,3 @@ Redmine::Plugin.register :redmine_pushover do
 end
 
 RedminePushover.setup
-
