@@ -13,6 +13,43 @@
           <label for="pref_pushover_skip_emails"><%= l :label_pushover_skip_emails %></label>
         </p>
       <% end %>
+
+      <p>
+        <%= button_tag l(:label_pushover_test_notification),
+              type: 'button',
+              id: 'pushover-test-btn',
+              class: 'btn btn-default',
+              onclick: 'sendPushoverTest(this)' %>
+      </p>
+
+      <script>
+        function sendPushoverTest(btn) {
+          btn.disabled = true;
+          btn.textContent = '...';
+          $.ajax({
+            url: '<%= pushover_test_path %>',
+            type: 'POST',
+            dataType: 'json',
+            headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') },
+            success: function(data) {
+              btn.textContent = data.success
+                ? '<%= j l(:label_pushover_test_success) %>'
+                : '<%= j l(:label_pushover_test_failed) %>';
+              setTimeout(function() {
+                btn.textContent = '<%= j l(:label_pushover_test_notification) %>';
+                btn.disabled = false;
+              }, 3000);
+            },
+            error: function() {
+              btn.textContent = '<%= j l(:label_pushover_test_failed) %>';
+              setTimeout(function() {
+                btn.textContent = '<%= j l(:label_pushover_test_notification) %>';
+                btn.disabled = false;
+              }, 3000);
+            }
+          });
+        }
+      </script>
     <% else %>
       <p><%= raw l :info_pushover_activation %></p>
       <p><%= link_to l(:label_pushover_activate), pushover_activation_url %></p>
