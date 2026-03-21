@@ -39,7 +39,7 @@ class PushoverCallbacksController < ApplicationController
 
     result = RedminePushover::Pushover.send_message(
       user: User.current.pushover_key,
-      message: I18n.t(:pushover_test_message),
+      message: l(:pushover_test_message),
       title: Setting.app_title
     )
 
