@@ -44,19 +44,21 @@ class PushoverCallbacksControllerTest < ActionController::TestCase
 
   test 'test action should return 422 when user is not connected' do
     @request.session[:user_id] = 2
-    User.find(2).pref['pushover_user_key'] = nil
-    User.find(2).pref.save
+    user = User.find(2)
+    user.pref['pushover_user_key'] = nil
+    user.pref.save
     post :test
     assert_response :unprocessable_entity
   end
 
   test 'test action should send notification and return success' do
     @request.session[:user_id] = 2
-    User.find(2).pref['pushover_user_key'] = 'testkey123'
-    User.find(2).pref.save
+    user = User.find(2)
+    user.pref['pushover_user_key'] = 'testkey123'
+    user.pref.save
 
     sent = []
-    RedminePushover::Pushover.define_method(:send_message) { |msg| sent << msg; true }
+    RedminePushover::Pushover.define_singleton_method(:send_message) { |msg| sent << msg; true }
 
     post :test
     assert_response :success
@@ -70,10 +72,11 @@ class PushoverCallbacksControllerTest < ActionController::TestCase
 
   test 'test action should return success false when pushover fails' do
     @request.session[:user_id] = 2
-    User.find(2).pref['pushover_user_key'] = 'testkey123'
-    User.find(2).pref.save
+    user = User.find(2)
+    user.pref['pushover_user_key'] = 'testkey123'
+    user.pref.save
 
-    RedminePushover::Pushover.define_method(:send_message) { |msg| false }
+    RedminePushover::Pushover.define_singleton_method(:send_message) { |msg| false }
 
     post :test
     assert_response :success

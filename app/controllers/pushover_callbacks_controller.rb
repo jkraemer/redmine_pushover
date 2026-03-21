@@ -31,6 +31,21 @@ class PushoverCallbacksController < ApplicationController
     end
   end
 
+  def test
+    unless User.current.pushover_connected?
+      head :unprocessable_entity
+      return
+    end
+
+    result = RedminePushover::Pushover.send_message(
+      user: User.current.pushover_key,
+      message: I18n.t(:pushover_test_message),
+      title: Setting.app_title
+    )
+
+    render json: { success: result }
+  end
+
   def failure
     flash[:error] = l(:flash_pushover_failed)
     redirect_to my_account_path
