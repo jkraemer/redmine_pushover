@@ -21,3 +21,7 @@ en:
   info_pushover_pushover_url: 'Then, create a subscription by clicking on "Edit Subscription Settings" and choose the "URL" subscription type, setting the base URL to <code>%{url}</code>. After creating the subscription, a subscription URL like <code>https://pushover.net/subscribe/Redmine-f504h08fhlasdfj</code> will be shown. This is what you have to enter here.'
   info_pushover_activation: 'Pushover notifications are currently <strong>disabled</strong>. Use the link below to connect your Redmine account to Pushover.'
   info_pushover_manage: 'Pushover notifications are currently <strong>enabled</strong>. Use the link below to change your Pushover settings or to stop reveiving notifications from this Redmine.'
+  label_pushover_test_notification: Send test notification
+  label_pushover_test_success: Sent!
+  label_pushover_test_failed: Failed
+  pushover_test_message: Test notification from Redmine
