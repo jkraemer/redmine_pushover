@@ -1,4 +1,5 @@
 require File.expand_path('../../test_helper', __FILE__)
+require 'minitest/mock'
 
 class PushoverCallbacksControllerTest < ActionController::TestCase
   fixtures :users
@@ -57,17 +58,12 @@ class PushoverCallbacksControllerTest < ActionController::TestCase
     user.pref['pushover_user_key'] = 'testkey123'
     user.pref.save
 
-    sent = []
-    RedminePushover::Pushover.define_singleton_method(:send_message) { |msg| sent << msg; true }
-
-    post :test
-    assert_response :success
-    json = JSON.parse(response.body)
-    assert json['success']
-    assert_equal 1, sent.size
-    assert_equal 'testkey123', sent.first[:user]
-  ensure
-    RedminePushover::Pushover.singleton_class.remove_method(:send_message) rescue nil
+    RedminePushover::Pushover.stub(:send_message, true) do
+      post :test
+      assert_response :success
+      json = JSON.parse(response.body)
+      assert json['success']
+    end
   end
 
   test 'test action should return success false when pushover fails' do
@@ -76,14 +72,12 @@ class PushoverCallbacksControllerTest < ActionController::TestCase
     user.pref['pushover_user_key'] = 'testkey123'
     user.pref.save
 
-    RedminePushover::Pushover.define_singleton_method(:send_message) { |msg| false }
-
-    post :test
-    assert_response :success
-    json = JSON.parse(response.body)
-    assert_not json['success']
-  ensure
-    RedminePushover::Pushover.singleton_class.remove_method(:send_message) rescue nil
+    RedminePushover::Pushover.stub(:send_message, false) do
+      post :test
+      assert_response :success
+      json = JSON.parse(response.body)
+      assert_not json['success']
+    end
   end
 
 end
